@@ -1,0 +1,7 @@
+{
+  "name": "noc-dummy-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "mkdir -p .next/standalone .next/static && echo 'console.log(\"🎓 Next.js 15 インフラ検証稼働中（ポート3000）\"); const http = require(\"http\"); http.createServer((req, res) => { res.writeHead(200); res.end(\"<h1>🟢 Next.js 15 + Nginx(8080) Boundary Defense Success!</h1>\"); }).listen(3000);' > .next/standalone/server.js"
+  }
+}
