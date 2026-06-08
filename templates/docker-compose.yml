@@ -36,6 +36,9 @@ services:
       - PORT=3000
       - HOSTNAME=0.0.0.0
       - DATABASE_URL=postgresql://postgres:supabase_secure_pass_2026@supabase_db:5432/app_db?schema=public
+      # ⚠️ 本番環境では必ず強力なランダム文字列に変更すること (例: openssl rand -base64 32)
+      - NEXTAUTH_SECRET=change-this-to-a-strong-random-secret
+      - NEXTAUTH_URL=http://10.149.245.115:8080
     depends_on:
       supabase_db:
         condition: service_healthy
@@ -70,9 +73,10 @@ services:
       - ./supabase_db_data:/var/lib/postgresql/data:Z
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d app_db"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 60s
     deploy:
       resources:
         limits:
